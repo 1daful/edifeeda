@@ -8,7 +8,7 @@ export class ZerpSerp implements IMediaApi {
     constructor(apiFormat: ApiFormat) {
         this.apiFormat = apiFormat
     }
-    client: ApiClient = new Axiosi();
+    client = new Axiosi();
     resources: Resource[] = [];
     apiFormat: ApiFormat = new ApiFormat()
     async getBaseUrl() {

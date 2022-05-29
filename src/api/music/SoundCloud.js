@@ -1,9 +1,8 @@
 import { Resource } from "../Resource";
 import { Axiosi } from "../Axiosi";
 import { ApiFormat } from "../../apiReqFormat/ApiFormat";
-import config from "../../../public/config.json";
 export class SoundCloud {
-    /*constructor() {
+    constructor() {
         this.client.load('../config.json').then(resp => {
             if (resp) {
                 this.config = resp.data;
@@ -11,10 +10,10 @@ export class SoundCloud {
                 this.BASE_PARAMS = {
                     ID: this.config.api.SoundCloud.id,
                     KEY: this.config.api.SoundCloud.key
-                }
+                };
             }
-        })
-    }*/
+        });
+    }
     client = new Axiosi();
     config;
     resources = [];
@@ -67,8 +66,8 @@ export class SoundCloud {
     }*/
     async getBaseParams() {
         try {
-            //const config = await this.client.load('../config.json')
-            const apiBaseParams = config?.api.SoundCloud.baseParams;
+            const config = await this.client.load('../config.json');
+            const apiBaseParams = config?.data.api.SoundCloud.baseParams;
             return apiBaseParams;
         }
         catch (err) {
@@ -77,8 +76,8 @@ export class SoundCloud {
     }
     async getBaseUrl() {
         try {
-            //const config = await this.client.load('../config.json')
-            const apiBaseUrl = config?.api.SoundCloud.baseUrl;
+            const config = await this.client.load('../config.json');
+            const apiBaseUrl = config?.data.api.SoundCloud.baseUrl;
             return apiBaseUrl;
         }
         catch (err) {

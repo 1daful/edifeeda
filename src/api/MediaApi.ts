@@ -2,7 +2,6 @@ import { Axiosi } from "./Axiosi";
 import { Resource } from "./Resource";
 import { IMediaApi } from "./IMediaApi";
 import { ApiFormat } from "../apiReqFormat/ApiFormat";
-
 /**
  * This class takes all the individual media apis and use them for the application.
  */
@@ -79,7 +78,6 @@ export class MediaApi {
         //this.setBaseParam(resource);
         const client = new Axiosi(resource);
         const items = await client.get();
-        console.log("items: ", items)
         return items;
     }
 

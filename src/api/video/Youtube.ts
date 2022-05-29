@@ -2,11 +2,9 @@ import { IMediaApi } from "../IMediaApi";
 import { Resource } from "../Resource";
 import {Axiosi} from "../Axiosi";
 import { ApiFormat } from "../../apiReqFormat/ApiFormat";
-import config from "../../../public/config.json"
-
 export class Youtube implements IMediaApi{
     constructor() {
-        /*this.client.load('../config.json').then(resp => {
+        this.client.load('../config.json').then(resp => {
             if (resp) {
                 this.config = resp.data;
                 this.BASE_URL = this.config.api.Youtube.baseUrl;
@@ -15,7 +13,7 @@ export class Youtube implements IMediaApi{
                     KEY: this.config.api.Youtube.key
                 }
             }
-        })*/
+        })
     }
     client = new Axiosi()
     config!: any
@@ -60,8 +58,8 @@ export class Youtube implements IMediaApi{
     }, 'searchResp')
     async getBaseParams() {
         try{
-            //const config = await this.client.load('../config.json')
-            const apiBaseParams = config?.api.Youtube.config.baseParams
+            const config = await this.client.load('../config.json')
+            const apiBaseParams = config?.data.api.Youtube.baseParams
             return apiBaseParams
         }
         catch (err) {
@@ -70,8 +68,8 @@ export class Youtube implements IMediaApi{
     }
     async getBaseUrl() {
         try{
-            //const config = await this.client.load('../config.json')
-            const apiBaseUrl = config?.api.Youtube.baseUrl
+            const config = await this.client.load('../config.json')
+            const apiBaseUrl = config?.data.api.Youtube.baseUrl
             return apiBaseUrl
         }
         catch (err) {

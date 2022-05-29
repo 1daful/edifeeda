@@ -3,6 +3,7 @@ import { Resource} from "../Resource";
 //import { Response } from "../Response";
 import { Axiosi } from "../Axiosi";
 import { ApiFormat } from "../../apiReqFormat/ApiFormat";
+import { ApiClient } from "src/apiClient";
 
 export class PaperQuotes implements IMediaApi{
     constructor() {
@@ -64,7 +65,7 @@ export class PaperQuotes implements IMediaApi{
             console.log(err)
         }
     }
-    
+
     getData(resData: Record<string, any>) {
         const respData: Record<string, any>[] = [];
         let mData: Record<string, any>

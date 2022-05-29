@@ -2,7 +2,7 @@ import { Resource } from "../Resource";
 import { IMediaApi } from "../IMediaApi";
 import { Axiosi } from "../Axiosi";
 import { ApiFormat } from "../../apiReqFormat/ApiFormat";
-import config from "../../../public/config.json";
+
 /**
  * This is a concrete GoogleBooks class implementation of IMedia
  */
@@ -13,8 +13,8 @@ export class GoogleBooks implements IMediaApi{
     resources: Resource[] = [];
     BASE_URL: any
     BASE_PARAMS: any;
-    apiFormat: ApiFormat = new ApiFormat({keyword: "christian"});
-
+    apiFormat: ApiFormat = new ApiFormat({keyword: "rent"});
+    
     volumeRes = new Resource(this, 'books',
     {
         name: 'volumeReq',
@@ -44,8 +44,8 @@ export class GoogleBooks implements IMediaApi{
 
     async getBaseUrl() {
         try{
-            //const config = await this.client.load('../config.json')
-            const apiBaseUrl = config?.api.GoogleBooks.baseUrl
+            const config = await this.client.load('../config.json')
+            const apiBaseUrl = config?.data.api.GoogleBooks.baseUrl
             return apiBaseUrl
         }
         catch (err) {
@@ -66,8 +66,8 @@ export class GoogleBooks implements IMediaApi{
 
     async getBaseParams() {
         try{
-            //const config = await this.client.load('../config.json')
-            const apiBaseParams = config?.api.GoogleBooks.config
+            const config = await this.client.load('../config.json')
+            const apiBaseParams = config?.data.api.GoogleBooks.baseParams
             return apiBaseParams
         }
         catch (err) {
@@ -76,19 +76,9 @@ export class GoogleBooks implements IMediaApi{
     }
 
     getData(resData: Record<string, any>) {
-      let creators = []
         let respData: Record<string, any>[] = [];
         let mData: Record<string, any>
         for (const data of resData.items) {
-          for (const authorName of data.authors) {
-            let author = {
-              name: String,
-              pic: String,
-              bio: String
-            }
-            author.name = authorName
-            creators.push(author)
-          }
             mData = {
                 type: "books",
                 id: data.id,
@@ -102,7 +92,7 @@ export class GoogleBooks implements IMediaApi{
                 created: data.volumeInfo.publishedDate,
                 license: '',
                 title: data.volumeInfo.title,
-                authors: creators,
+                authors: data.authors,
                 printType: data.printType //book or magazine
             }
             //this.volumeRes.response.dataList.push(mData);

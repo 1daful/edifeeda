@@ -1,7 +1,6 @@
 import { Resource } from "../Resource";
 import { Axiosi } from "../Axiosi";
 import { ApiFormat } from "../../apiReqFormat/ApiFormat";
-import config from "../../../public/config.json";
 /**
  * This is a concrete GoogleBooks class implementation of IMedia
  */
@@ -12,7 +11,7 @@ export class GoogleBooks {
     resources = [];
     BASE_URL;
     BASE_PARAMS;
-    apiFormat = new ApiFormat({ keyword: "christian" });
+    apiFormat = new ApiFormat({ keyword: "rent" });
     volumeRes = new Resource(this, 'books', {
         name: 'volumeReq',
         baseUrl: '/volumes',
@@ -39,8 +38,8 @@ export class GoogleBooks {
     }*/
     async getBaseUrl() {
         try {
-            //const config = await this.client.load('../config.json')
-            const apiBaseUrl = config?.api.GoogleBooks.baseUrl;
+            const config = await this.client.load('../config.json');
+            const apiBaseUrl = config?.data.api.GoogleBooks.baseUrl;
             return apiBaseUrl;
         }
         catch (err) {
@@ -60,8 +59,8 @@ export class GoogleBooks {
     }
     async getBaseParams() {
         try {
-            //const config = await this.client.load('../config.json')
-            const apiBaseParams = config?.api.GoogleBooks.config;
+            const config = await this.client.load('../config.json');
+            const apiBaseParams = config?.data.api.GoogleBooks.baseParams;
             return apiBaseParams;
         }
         catch (err) {
@@ -69,19 +68,9 @@ export class GoogleBooks {
         }
     }
     getData(resData) {
-        let creators = [];
         let respData = [];
         let mData;
         for (const data of resData.items) {
-            for (const authorName of data.authors) {
-                let author = {
-                    name: String,
-                    pic: String,
-                    bio: String
-                };
-                author.name = authorName;
-                creators.push(author);
-            }
             mData = {
                 type: "books",
                 id: data.id,
@@ -95,7 +84,7 @@ export class GoogleBooks {
                 created: data.volumeInfo.publishedDate,
                 license: '',
                 title: data.volumeInfo.title,
-                authors: creators,
+                authors: data.authors,
                 printType: data.printType //book or magazine
             };
             //this.volumeRes.response.dataList.push(mData);

@@ -2,6 +2,7 @@ import { IMediaApi } from "../IMediaApi";
 import { Resource } from "../Resource";
 import { Axiosi } from "../Axiosi";
 import { ApiFormat } from "../../apiReqFormat/ApiFormat";
+import { ApiClient } from "src/apiClient";
 /*import { ApiClient } from "../../apiClient";
 import { QuoteMedia } from "../../media/QuoteMedia";
 import { IMedia } from "../../media/IMedia";*/

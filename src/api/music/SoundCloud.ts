@@ -2,10 +2,10 @@ import { IMediaApi } from "../IMediaApi";
 import { Resource } from "../Resource";
 import { Axiosi } from "../Axiosi";
 import { ApiFormat } from "../../apiReqFormat/ApiFormat";
-import config from "../../../public/config.json"
+import { ApiClient } from "src/apiClient";
 
 export class SoundCloud implements IMediaApi{
-    /*constructor() {
+    constructor() {
         this.client.load('../config.json').then(resp => {
             if (resp) {
                 this.config = resp.data;
@@ -16,7 +16,7 @@ export class SoundCloud implements IMediaApi{
                 }
             }
         })
-    }*/
+    }
   client = new Axiosi()
     config!: any
     resources: [] = [];
@@ -75,8 +75,8 @@ export class SoundCloud implements IMediaApi{
 
     async getBaseParams() {
         try{
-            //const config = await this.client.load('../config.json')
-            const apiBaseParams = config?.api.SoundCloud.baseParams
+            const config = await this.client.load('../config.json')
+            const apiBaseParams = config?.data.api.SoundCloud.baseParams
             return apiBaseParams
         }
         catch (err) {
@@ -85,8 +85,8 @@ export class SoundCloud implements IMediaApi{
     }
     async getBaseUrl() {
         try{
-            //const config = await this.client.load('../config.json')
-            const apiBaseUrl = config?.api.SoundCloud.baseUrl
+            const config = await this.client.load('../config.json')
+            const apiBaseUrl = config?.data.api.SoundCloud.baseUrl
             return apiBaseUrl
         }
         catch (err) {

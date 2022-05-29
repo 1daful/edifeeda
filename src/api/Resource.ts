@@ -4,7 +4,7 @@ import { IMediaApi } from "./IMediaApi";
 import site from "../../public/config.json";
 //import { Utility } from "../Utility";
 /**
- *
+ * 
  * This class reads a media resource api configuration and sets up request format from it.
  * This class prepares the request parameters, and the appropriate response format.
  */
@@ -83,7 +83,7 @@ export class Resource {
     getRequestParam(resData: Record<string, any>) {
         let newParam = '';
         //const param = resData; //Request parameters
-
+        
         Object.keys(resData).forEach(key => {
             if (this.isObject(resData[key])){
                 const keyse = Object.keys(resData[key])
@@ -127,26 +127,20 @@ export class Resource {
      * @param type type of the resource to retrieve
      */
     async getBaseParam(){
-        const obj = {
-          header: {},
-          baseParams: {
-            baseUrl: ""
-          },
-        }
+        const obj: Record<string, any> = {}
         try {
-            const apiBaseParams = await this.api.getBaseParams().baseParams
-            Object.assign(obj.baseParams, apiBaseParams);
-            Object.assign(obj.baseParams, this.getRequestParam(this.request.params))
-            const baseURL = await this.getBaseURL() || ""
-            obj.baseParams.baseUrl = baseURL
-            obj.header = (await this.getBaseParam()).header
+            const apiBaseParams = await this.api.getBaseParams()
+            Object.assign(obj, apiBaseParams);
+            Object.assign(obj, this.getRequestParam(this.request.params))
+            const baseURL = await this.getBaseURL()
+            obj.baseUrl = baseURL
             return obj
         }
         catch (err) {
             console.log
         }
         //this.util.joinObject(this.api.BASE_PARAMS, this.getRequestParam(this.request.params));
-
+        
         return obj
     }
 

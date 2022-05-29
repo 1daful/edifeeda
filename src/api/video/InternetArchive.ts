@@ -2,6 +2,7 @@ import { Resource } from "../Resource";
 import { IMediaApi } from "../IMediaApi";
 import { Axiosi } from "../Axiosi.js";
 import { ApiFormat } from "../../apiReqFormat/ApiFormat";
+import { ApiClient } from "src/apiClient";
 
 /**
  * This is a concrete InternetArchive class implementation of IMedia
@@ -19,7 +20,7 @@ export class InternetArchive implements IMediaApi{
             }
         });
     }
-  client  = new Axiosi()
+  client = new Axiosi()
     config!: any
     resources: Resource[] =[];
     BASE_URL = '';

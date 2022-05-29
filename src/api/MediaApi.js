@@ -71,7 +71,6 @@ export class MediaApi {
         //this.setBaseParam(resource);
         const client = new Axiosi(resource);
         const items = await client.get();
-        console.log("items: ", items);
         return items;
     }
     async postItem(type, params, data) {

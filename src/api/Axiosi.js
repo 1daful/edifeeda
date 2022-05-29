@@ -1,5 +1,5 @@
 import axios from 'axios';
-//import { NetworkLocal } from "./network";
+import { NetworkLocal } from "./network";
 export class Axiosi {
     constructor(resource) {
         if (resource) {
@@ -18,20 +18,22 @@ export class Axiosi {
             //const baseUrl = await this.resource.getBaseURL()
             const baseUrl = this.resource.URL;
             //console.log('Axios baseUrl:', baseUrl)
-            this.config.params = (await this.resource.getBaseParam()).baseParams;
-            this.config.headers = (await this.resource.getBaseParam()).header;
-            console.log("Calling with Axios config: ", this.config);
+            this.config.params = await this.resource.getBaseParam();
+            NetworkLocal.test("Calling with Axios config: ", this.config.params);
             if (baseUrl) {
                 const response = await axios.get(baseUrl, this.config)
                     .catch((error) => {
                     if (error.request) {
-                        //const data = NetworkLocal.test(this.message)
+                        const data = NetworkLocal.test(this.message);
                         if (response) {
                             return this.resource.getResponse(response.data);
                         }
+                        else {
+                            data;
+                        }
                     }
                 });
-                //console.log("response: ", response)
+                console.log("response: ", response);
                 const res = this.resource.getResponse(response.data);
                 console.log("axios res: ", res);
                 return res;
@@ -57,7 +59,7 @@ export class Axiosi {
                 this.config.params = this.resource.getBaseParam();
                 if (baseUrl) {
                     const response = await axios.post(baseUrl, data, this.config);
-                    //NetworkLocal.test(this.message);
+                    NetworkLocal.test(this.message);
                     return this.resource.getResponse(response.data);
                 }
                 //return this.resource.response.dataList;
@@ -71,6 +73,16 @@ export class Axiosi {
         }
         const nothing = [];
         return nothing;
+    }
+    async load(file) {
+        try {
+            const resp = await axios.get(file);
+            //NetworkLocal.test(filthis.message)
+            return resp;
+        }
+        catch (err) {
+            console.error(err);
+        }
     }
 }
 //# sourceMappingURL=Axiosi.js.map
