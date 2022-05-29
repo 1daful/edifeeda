@@ -115,13 +115,19 @@ export class Resource {
      * @param type type of the resource to retrieve
      */
     async getBaseParam() {
-        const obj = {};
+        const obj = {
+            header: {},
+            baseParams: {
+                baseUrl: ""
+            },
+        };
         try {
-            const apiBaseParams = await this.api.getBaseParams();
+            const apiBaseParams = await this.api.getBaseParams().baseParams;
             Object.assign(obj, apiBaseParams);
             Object.assign(obj, this.getRequestParam(this.request.params));
-            const baseURL = await this.getBaseURL();
-            obj.baseUrl = baseURL;
+            const baseURL = await this.getBaseURL() || "";
+            obj.baseParams.baseUrl = baseURL;
+            obj.header = (await this.api.getBaseParams()).header;
             return obj;
         }
         catch (err) {
