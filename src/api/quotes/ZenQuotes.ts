@@ -5,18 +5,9 @@ import { ApiFormat } from "../../apiReqFormat/ApiFormat";
 import config from "../../../public/config.json"
 
 export class ZenQuotes implements IMediaApi{
-    /*constructor() {
-        this.axios.load('../config.json').then(resp => {
-            if (resp) {
-                this.config = resp.data;
-                this.BASE_URL = this.config.api.ZenQuotes.baseUrl;
-                this.BASE_PARAMS = {
-                    ID: this.config.api.ZenQuotes.id,
-                    KEY: this.config.api.ZenQuotes.key
-                };
-            }
-        });
-    }*/
+    constructor(format: {}) {
+      this.apiFormat = new ApiFormat(format)
+    }
     client = new Axiosi()
     config!: any
     BASE_URL = '';

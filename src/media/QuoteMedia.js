@@ -13,7 +13,7 @@ export class QuoteMedia {
     constructor() {
         //this.paperQuotes = new PaperQuotes();
         //this.theySaidSo = new TheySaidSo();
-        this.zenQuotes = new ZenQuotes();
+        this.zenQuotes = new ZenQuotes({});
         this.media = new Media("quotes");
         this.apis.push(/*this.theySaidSo, */ this.zenQuotes);
     }

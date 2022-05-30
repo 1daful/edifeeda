@@ -102,7 +102,7 @@ export class Media {
     getImage(mediaApi: MediaApi, items: MediaType[]) {
       items.forEach(async item => {
         const format = new ApiFormat({
-          query: item.content
+          keyword: item.content
         })
         mediaApi = new MediaApi(new Pexels(new ApiFormat(format)))
           const images = await mediaApi.getItems('images')

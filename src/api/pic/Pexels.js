@@ -4,7 +4,7 @@ import { Axiosi } from '../Axiosi';
 import { Resource } from '../Resource';
 export class Pexels {
     constructor(apiFormat) {
-        this.apiFormat = apiFormat;
+        this.apiFormat = new ApiFormat(apiFormat);
     }
     client = new Axiosi();
     resources = [];

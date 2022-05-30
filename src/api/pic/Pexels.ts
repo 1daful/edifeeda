@@ -5,8 +5,8 @@ import { IMediaApi } from '../IMediaApi';
 import { Resource } from '../Resource';
 import { MediaType } from "../../Types";
 export class Pexels implements IMediaApi{
-  constructor(apiFormat: ApiFormat) {
-    this.apiFormat = apiFormat
+  constructor(apiFormat: {}) {
+    this.apiFormat = new ApiFormat(apiFormat)
   }
   client = new Axiosi();
   resources: Resource[] = [];
