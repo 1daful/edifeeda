@@ -2,6 +2,7 @@ import { IMediaApi } from "../IMediaApi";
 import { Resource} from "../Resource";
 import { Axiosi } from "../Axiosi";
 import { ApiFormat } from "../../apiReqFormat/ApiFormat";
+import config from "../../../public/config.json"
 
 export class ZenQuotes implements IMediaApi{
     /*constructor() {
@@ -56,8 +57,8 @@ export class ZenQuotes implements IMediaApi{
 
     async getBaseParams() {
         try{
-            const config = await this.client.load('../config.json')
-            const apiBaseParams = config?.data.api.ZenQuotes.baseParams
+            //const config = await this.client.load('../config.json')
+            const apiBaseParams = config?.api.ZenQuotes.baseParams
             return apiBaseParams
         }
         catch (err) {
@@ -66,8 +67,8 @@ export class ZenQuotes implements IMediaApi{
     }
     async getBaseUrl() {
         try{
-            const config = await this.client.load('../config.json')
-            const apiBaseUrl = config?.data.api.ZenQuotes.baseUrl
+            //const config = await this.client.load('../config.json')
+            const apiBaseUrl = config?.api.ZenQuotes.baseUrl
             return apiBaseUrl
         }
         catch (err) {

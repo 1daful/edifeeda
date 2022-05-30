@@ -10,7 +10,7 @@ export class Pexels implements IMediaApi{
   }
   client = new Axiosi();
   resources: Resource[] = [];
-  apiFormat: ApiFormat = new ApiFormat();
+  apiFormat: ApiFormat = new ApiFormat()
   imageRes = new Resource(this, 'images', {
     name: "imageReq",
     baseUrl: "/search",

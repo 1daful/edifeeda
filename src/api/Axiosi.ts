@@ -2,6 +2,7 @@ import { ApiClient } from "../apiClient";
 import { Resource } from "./Resource";
 import axios, { AxiosRequestConfig } from 'axios';
 import { NetworkLocal } from "./network";
+import { networkInterfaces } from "os";
 
 export class Axiosi implements ApiClient {
     constructor (resource?: Resource) {
@@ -23,13 +24,15 @@ export class Axiosi implements ApiClient {
                 //const baseUrl = await this.resource.getBaseURL()
                 const baseUrl = this.resource.URL
                 //console.log('Axios baseUrl:', baseUrl)
-                this.config.params = await this.resource.getBaseParam();
+                this.config.headers = (await this.resource.getBaseParam()).header;
+                this.config.params = (await this.resource.getBaseParam()).baseParams
                 NetworkLocal.test("Calling with Axios config: ", this.config.params)
+                NetworkLocal.test("Config headers: ", this.config.headers)
                 if (baseUrl) {
                     const response: any = await axios.get(baseUrl, this.config)
                     .catch((error) => {
                         if (error.request) {
-                            
+
                             const data = NetworkLocal.test(this.message)
                             if (response){
                                 return this.resource.getResponse(response.data);
@@ -61,7 +64,7 @@ export class Axiosi implements ApiClient {
         if (this.resource) {
             //this.resource.setRequestParam(params);
             //this.resource.setRequestParam(data);
-            
+
             try {
                 const baseUrl = await this.resource.getBaseURL()
                 this.config.params = this.resource.getBaseParam();

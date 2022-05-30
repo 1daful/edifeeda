@@ -18,8 +18,10 @@ export class Axiosi {
             //const baseUrl = await this.resource.getBaseURL()
             const baseUrl = this.resource.URL;
             //console.log('Axios baseUrl:', baseUrl)
-            this.config.params = await this.resource.getBaseParam();
+            this.config.headers = (await this.resource.getBaseParam()).header;
+            this.config.params = (await this.resource.getBaseParam()).baseParams;
             NetworkLocal.test("Calling with Axios config: ", this.config.params);
+            NetworkLocal.test("Config headers: ", this.config.headers);
             if (baseUrl) {
                 const response = await axios.get(baseUrl, this.config)
                     .catch((error) => {

@@ -104,7 +104,7 @@ export class Media {
         const format = new ApiFormat({
           query: item.content
         })
-        mediaApi = new MediaApi(new Pexels(new ApiFormat()))
+        mediaApi = new MediaApi(new Pexels(new ApiFormat(format)))
           const images = await mediaApi.getItems('images')
           images[0].thumbnailSmall
         });
