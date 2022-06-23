@@ -34,6 +34,7 @@ export class QuoteMedia implements IMedia {
             console.log("QuoteMedia not successful")
         }
     }
+
     async readMedia(params?: string[], op?: Record<string, any>) {
         try {
             //NetworkLocal.test("Reading items from QuoteMedia")

@@ -112,7 +112,7 @@
           "baseUrl": "https://books.googleapis.com/books/v1",
           "config": {
             "baseParams": {
-              "key": "AIzaSyAlbER-HPdipvFgKJc-PWWZYhBIBSPxBNQ"
+              "apikey": "AIzaSyAlbER-HPdipvFgKJc-PWWZYhBIBSPxBNQ"
           }
           }
         },

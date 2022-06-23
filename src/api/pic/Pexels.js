@@ -2,23 +2,31 @@ import config from '../../../public/config.json';
 import { ApiFormat } from 'src/apiReqFormat/ApiFormat';
 import { Axiosi } from '../Axiosi';
 import { Resource } from '../Resource';
+import { createClient } from 'pexels';
 export class Pexels {
-    constructor(apiFormat) {
-        this.apiFormat = new ApiFormat(apiFormat);
+    constructor(format) {
+        let apiFormat = new ApiFormat(format);
+        this.imageRes = this.getResource(apiFormat);
+        this.cl = createClient(config.api.Pexels.config.header.Authorization);
     }
     client = new Axiosi();
+    cl;
     resources = [];
-    apiFormat = new ApiFormat();
-    imageRes = new Resource(this, 'images', {
-        name: "imageReq",
-        baseUrl: "/search",
-        params: {
-            query: this.apiFormat.keyword,
-            orientation: this.apiFormat.keyword,
-            page: "",
-            per_page: ""
-        }
-    }, "imageResp");
+    //apiFormat: ApiFormat
+    getResource(format) {
+        let imageRes = new Resource(this, 'images', {
+            name: "imageReq",
+            baseUrl: "/search",
+            params: {
+                query: format.keyword,
+                orientation: "",
+                page: "",
+                per_page: ""
+            }
+        }, "imageResp");
+        return imageRes;
+    }
+    imageRes;
     getBaseUrl() {
         const url = config.api.Pexels.baseUrl;
         return url;
@@ -71,6 +79,12 @@ export class Pexels {
             respData.push(mData);
         }
         return respData;
+    }
+    async getPhotos(query) {
+        let image = await this.cl.photos.search({
+            query: query
+        });
+        return image.photos;
     }
 }
 //# sourceMappingURL=Pexels.js.map

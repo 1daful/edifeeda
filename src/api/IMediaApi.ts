@@ -9,7 +9,8 @@ export interface IMediaApi {
     client: ApiClient;
     resources: Resource[];
 
-    apiFormat: ApiFormat;
+    //apiFormat: ApiFormat;
+    getResource(format: ApiFormat): Resource
 
     //setDataSource(data: Record<string, any>): void;
 

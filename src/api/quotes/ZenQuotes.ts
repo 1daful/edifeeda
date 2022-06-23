@@ -6,16 +6,11 @@ import config from "../../../public/config.json"
 
 export class ZenQuotes implements IMediaApi{
     constructor(format: {}) {
-      this.apiFormat = new ApiFormat(format)
+      const apiFormat = new ApiFormat(format)
+      this.quoteRes = this.getResource(apiFormat)
     }
-    client = new Axiosi()
-    config!: any
-    BASE_URL = '';
-    BASE_PARAMS: any;
-    resources: Resource[] = [];
-    apiFormat = new ApiFormat()
-
-    quoteRes = new Resource(this, 'quotes',
+  getResource(format: ApiFormat): Resource {
+    return new Resource(this, 'quotes',
     {
         name: 'quoteReq',
         baseUrl: '/quotes',
@@ -24,11 +19,21 @@ export class ZenQuotes implements IMediaApi{
             images: '',
             authors: '',
             random: '',
-            tags: ''
+            tags: '',
+            quotes: format.keyword
         }
     },
     'quoteResp'
     );
+  }
+    client = new Axiosi()
+    config!: any
+    BASE_URL = '';
+    BASE_PARAMS: any;
+    resources: Resource[] = [];
+    apiFormat = new ApiFormat()
+
+    quoteRes
 
     qod = new Resource(this, 'qod',
     {

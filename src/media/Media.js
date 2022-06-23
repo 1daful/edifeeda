@@ -4,6 +4,7 @@ import { MediaApi } from "../api/MediaApi.js";
 import { Repository } from "../model/Repository.js";
 import { EdiStorage } from "src/api/storage.js";
 import { Pexels } from "src/api/pic/Pexels.js";
+//import { IMediaApi } from "src/api/IMediaApi.js";
 import { ApiFormat } from "src/apiReqFormat/ApiFormat.js";
 //import { Typesense } from "src/typesense.js";
 //import { NetworkLocal } from "@/api/network.js";
@@ -36,10 +37,14 @@ export class Media {
                 //const name = mediaApi.api.constructor.name
                 //NetworkLocal.test(`${name} good!`)
                 const items = await mediaApi.getItems(type, params);
+                //const images = await this.getImage(mediaApi, "christians")
                 if (items) {
                     //NetworkLocal.test(`This is item from Media load. ${items}`)
                     //this.repository.changeDB('supabase')
-                    this.getImage(mediaApi, items);
+                    items.forEach(item => {
+                        let i = 0;
+                        //item.thumbnailSmall = images[i].src.original
+                    });
                     console.log("this is item from Media load: ", items);
                     await this.addItems(items);
                     //this.search.import()
@@ -86,15 +91,15 @@ export class Media {
             console.log("Unable to load media");
         }
     }
-    getImage(mediaApi, items) {
-        items.forEach(async (item) => {
-            const format = new ApiFormat({
-                keyword: item.content
-            });
-            mediaApi = new MediaApi(new Pexels(new ApiFormat(format)));
-            const images = await mediaApi.getItems('images');
-            images[0].thumbnailSmall;
+    async getImage(mediaApi, query) {
+        const format = new ApiFormat({
+            keyword: /*item.description*/ query
         });
+        //mediaApi = new MediaApi(new Pexels(new ApiFormat(format)))
+        //const images = await mediaApi.getItems('images')
+        const pexels = new Pexels({});
+        const images = await pexels.getPhotos('e');
+        return images;
         //this.store.upload()
     }
 }

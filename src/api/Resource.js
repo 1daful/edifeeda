@@ -1,5 +1,6 @@
 import { Response } from "./Response";
 import site from "../../public/config.json";
+import { NetworkLocal } from "./network";
 //import { Utility } from "../Utility";
 /**
  *
@@ -104,7 +105,7 @@ export class Resource {
                 delete resData[key];
             }
         });
-        //console.log("request param: ", resData)
+        NetworkLocal.test("request param: ", resData);
         return resData;
     }
     /*setResponseData() {
@@ -122,12 +123,14 @@ export class Resource {
             },
         };
         try {
-            const apiBaseParams = await this.api.getBaseParams().baseParams;
-            Object.assign(obj, apiBaseParams);
-            Object.assign(obj, this.getRequestParam(this.request.params));
+            const apiBaseParams = this.api.getBaseParams().baseParams;
+            Object.assign(obj.baseParams, apiBaseParams);
+            NetworkLocal.test("obj.params", apiBaseParams);
+            Object.assign(obj.baseParams, this.getRequestParam(this.request.params));
             const baseURL = await this.getBaseURL() || "";
             obj.baseParams.baseUrl = baseURL;
             obj.header = (await this.api.getBaseParams()).header;
+            NetworkLocal.test("config obj: ", obj);
             return obj;
         }
         catch (err) {

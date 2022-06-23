@@ -1,11 +1,15 @@
 import { Resource } from "../Resource";
 import { Axiosi } from "../Axiosi";
 import { ApiFormat } from "../../apiReqFormat/ApiFormat";
+import config from "../../../public/config.json";
 /**
  * This is a concrete GoogleBooks class implementation of IMedia
  */
 export class GoogleBooks {
     constructor() { }
+    getResource(format) {
+        throw new Error("Method not implemented.");
+    }
     client = new Axiosi();
     config;
     resources = [];
@@ -36,10 +40,10 @@ export class GoogleBooks {
     /*setDataSource(data: Record<string, any>) {
         this.volumeRes.response.dataSource = data.items;
     }*/
-    async getBaseUrl() {
+    getBaseUrl() {
         try {
-            const config = await this.client.load('../config.json');
-            const apiBaseUrl = config?.data.api.GoogleBooks.baseUrl;
+            //const config = await this.client.load('../config.json')
+            const apiBaseUrl = config.api.GoogleBooks.baseUrl;
             return apiBaseUrl;
         }
         catch (err) {
@@ -57,10 +61,10 @@ export class GoogleBooks {
             }
         })*/
     }
-    async getBaseParams() {
+    getBaseParams() {
         try {
-            const config = await this.client.load('../config.json');
-            const apiBaseParams = config?.data.api.GoogleBooks.baseParams;
+            //const config = await this.client.load('../config.json')
+            const apiBaseParams = config.api.GoogleBooks.config;
             return apiBaseParams;
         }
         catch (err) {

@@ -4,7 +4,22 @@ import { ApiFormat } from "../../apiReqFormat/ApiFormat";
 import config from "../../../public/config.json";
 export class ZenQuotes {
     constructor(format) {
-        this.apiFormat = new ApiFormat(format);
+        const apiFormat = new ApiFormat(format);
+        this.quoteRes = this.getResource(apiFormat);
+    }
+    getResource(format) {
+        return new Resource(this, 'quotes', {
+            name: 'quoteReq',
+            baseUrl: '/quotes',
+            params: {
+                categories: '',
+                images: '',
+                authors: '',
+                random: '',
+                tags: '',
+                quotes: format.keyword
+            }
+        }, 'quoteResp');
     }
     client = new Axiosi();
     config;
@@ -12,17 +27,7 @@ export class ZenQuotes {
     BASE_PARAMS;
     resources = [];
     apiFormat = new ApiFormat();
-    quoteRes = new Resource(this, 'quotes', {
-        name: 'quoteReq',
-        baseUrl: '/quotes',
-        params: {
-            categories: '',
-            images: '',
-            authors: '',
-            random: '',
-            tags: ''
-        }
-    }, 'quoteResp');
+    quoteRes;
     qod = new Resource(this, 'qod', {
         name: 'qodReq',
         baseUrl: '/qod',

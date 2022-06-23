@@ -6,7 +6,7 @@
             Quote  of the day
           </h4>
           <QOD></QOD>
-          <!--<MediaComponent v-if="pos" :pos="pos"></MediaComponent>-->
+          <MediaComponent v-if="pos" :pos="pos"></MediaComponent>
           <!--<Newsletter v-if="site" :bgImg="site.newsletter.bgImg"></Newsletter>-->
           <Newsletter></Newsletter>
     </q-page>

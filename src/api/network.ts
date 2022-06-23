@@ -8,7 +8,7 @@ export class NetworkLocal {
     static isLoopback = isLoopbackAddr(window.location.origin)
     static onLine = window.navigator.onLine;
 
-    static test(message: string, msg?: string) {
+    static test(message: string, msg?: any) {
         if (!this.isLoopback){
             console.log(message, msg)
             console.log("Network offline:")

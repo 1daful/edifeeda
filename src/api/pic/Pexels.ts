@@ -4,24 +4,34 @@ import { Axiosi } from '../Axiosi';
 import { IMediaApi } from '../IMediaApi';
 import { Resource } from '../Resource';
 import { MediaType } from "../../Types";
+import { createClient, PhotosWithTotalResults } from 'pexels';
 export class Pexels implements IMediaApi{
-  constructor(apiFormat: {}) {
-    this.apiFormat = new ApiFormat(apiFormat)
+  constructor(format: {}) {
+    let apiFormat = new ApiFormat(format)
+    this.imageRes = this.getResource(apiFormat)
+    this.cl = createClient(config.api.Pexels.config.header.Authorization)
+
   }
   client = new Axiosi();
+  cl
   resources: Resource[] = [];
-  apiFormat: ApiFormat = new ApiFormat()
-  imageRes = new Resource(this, 'images', {
-    name: "imageReq",
-    baseUrl: "/search",
-    params: {
-      query: this.apiFormat.keyword,
-      orientation: this.apiFormat.keyword,
-      page: "",
-      per_page: ""
-}
-  },
-  "imageResp")
+  //apiFormat: ApiFormat
+  getResource(format: ApiFormat): Resource {
+    let imageRes = new Resource(this, 'images', {
+      name: "imageReq",
+      baseUrl: "/search",
+      params: {
+        query: format.keyword,
+        orientation: "",
+        page: "",
+        per_page: ""
+  }
+    },
+    "imageResp")
+    return imageRes
+  }
+  imageRes
+
 
   getBaseUrl() {
     const url = config.api.Pexels.baseUrl
@@ -75,5 +85,13 @@ export class Pexels implements IMediaApi{
           respData.push(mData);
       }
       return respData
+  }
+
+  async getPhotos(query: string) {
+    let image: any  = await this.cl.photos.search({
+      query: query
+    }
+    )
+    return image.photos
   }
 }

@@ -5,7 +5,7 @@ import { IMedia } from "./IMedia.js";
 import { Repository } from "../model/Repository.js";
 import { EdiStorage } from "src/api/storage.js";
 import { Pexels } from "src/api/pic/Pexels.js";
-import { IMediaApi } from "src/api/IMediaApi.js";
+//import { IMediaApi } from "src/api/IMediaApi.js";
 import { ApiFormat } from "src/apiReqFormat/ApiFormat.js";
 import { MediaType } from "src/Types.js";
 
@@ -43,10 +43,14 @@ export class Media {
                 //const name = mediaApi.api.constructor.name
                 //NetworkLocal.test(`${name} good!`)
                 const items = await mediaApi.getItems(type, params) as unknown as MediaType[]
+                //const images = await this.getImage(mediaApi, "christians")
                 if (items) {
                     //NetworkLocal.test(`This is item from Media load. ${items}`)
                     //this.repository.changeDB('supabase')
-                    this.getImage(mediaApi, items)
+                    items.forEach(item => {
+                      let i = 0
+                      //item.thumbnailSmall = images[i].src.original
+                    });
                     console.log("this is item from Media load: ", items)
                     await this.addItems(items);
                     //this.search.import()
@@ -99,15 +103,15 @@ export class Media {
 
     }
 
-    getImage(mediaApi: MediaApi, items: MediaType[]) {
-      items.forEach(async item => {
+    async getImage(mediaApi: MediaApi, query: string) {
         const format = new ApiFormat({
-          keyword: item.content
+          keyword: /*item.description*/ query
         })
-        mediaApi = new MediaApi(new Pexels(new ApiFormat(format)))
-          const images = await mediaApi.getItems('images')
-          images[0].thumbnailSmall
-        });
+        //mediaApi = new MediaApi(new Pexels(new ApiFormat(format)))
+          //const images = await mediaApi.getItems('images')
+          const pexels = new Pexels({})
+          const images = await pexels.getPhotos('e')
+          return images
         //this.store.upload()
     }
     /*readItem(collName: string) {

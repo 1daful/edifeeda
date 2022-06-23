@@ -2,7 +2,7 @@
     <div class="container">
     <div class="row">
         <div class="col-sm-8">
-            <q-img :src="media.thumbnailLarge"></q-img>
+            <q-img :src="media?.thumbnailSmall"></q-img>
             <h4>
                 {{media.title}}
                 {{media.description}}
