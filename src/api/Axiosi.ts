@@ -86,9 +86,9 @@ export class Axiosi implements ApiClient {
         return nothing;
     }
 
-    async load(file: string) {
+    async load(addr: string) {
     try {
-      const resp = await axios.get(file)
+      const resp = await axios.get(addr)
       //NetworkLocal.test(filthis.message)
       return resp
     }

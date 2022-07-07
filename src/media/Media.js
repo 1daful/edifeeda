@@ -3,9 +3,9 @@ import { MediaApi } from "../api/MediaApi.js";
 //import { SupabaseRepo } from "../model/SupabaseRepo";
 import { Repository } from "../model/Repository.js";
 import { EdiStorage } from "src/api/storage.js";
-import { Pexels } from "src/api/pic/Pexels.js";
 //import { IMediaApi } from "src/api/IMediaApi.js";
 import { ApiFormat } from "src/apiReqFormat/ApiFormat.js";
+import { Axiosi } from "../api/Axiosi";
 //import { Typesense } from "src/typesense.js";
 //import { NetworkLocal } from "@/api/network.js";
 /**
@@ -21,6 +21,8 @@ export class Media {
     store = new EdiStorage();
     //search = new Typesense()
     //genre: string = '';
+    client = new Axiosi();
+    url = "https://api.unspash.com/photos/random?client_id=h2QN0xKvn2yEbGzLAzt__xrgVQI_AVu2Gwn3WdZn0gE&query=";
     /**
      * Used to delegate a media class method to get mediaItems from its registered media APIs, and the save them in the repository for peristence.
      * @param type
@@ -41,9 +43,11 @@ export class Media {
                 if (items) {
                     //NetworkLocal.test(`This is item from Media load. ${items}`)
                     //this.repository.changeDB('supabase')
-                    items.forEach(item => {
+                    items.forEach(async (item) => {
                         let i = 0;
                         //item.thumbnailSmall = images[i].src.original
+                        const image = await this.getImage(this.url, item.description);
+                        item.thumbnailSmall = image.urls.regular;
                     });
                     console.log("this is item from Media load: ", items);
                     await this.addItems(items);
@@ -91,15 +95,16 @@ export class Media {
             console.log("Unable to load media");
         }
     }
-    async getImage(mediaApi, query) {
+    async getImage(url, query) {
         const format = new ApiFormat({
             keyword: /*item.description*/ query
         });
         //mediaApi = new MediaApi(new Pexels(new ApiFormat(format)))
         //const images = await mediaApi.getItems('images')
-        const pexels = new Pexels({});
-        const images = await pexels.getPhotos('e');
-        return images;
+        // const pexels = new Pexels({})
+        //const images = await pexels.getPhotos('e')
+        const image = await this.client.load(url + query);
+        return image?.data;
         //this.store.upload()
     }
 }

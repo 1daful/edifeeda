@@ -76,9 +76,9 @@ export class Axiosi {
         const nothing = [];
         return nothing;
     }
-    async load(file) {
+    async load(addr) {
         try {
-            const resp = await axios.get(file);
+            const resp = await axios.get(addr);
             //NetworkLocal.test(filthis.message)
             return resp;
         }

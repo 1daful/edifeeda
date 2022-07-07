@@ -1,19 +1,19 @@
 <template>
     <div class="container">
     <div class="row">
-        <div class="col-sm-8">
-            <q-img :src="media?.thumbnailSmall"></q-img>
+        <div class="col-sm-8" v-if="media">
+            <q-img :src="media.thumbnailSmall"></q-img>
             <h4>
                 {{media.title}}
                 {{media.description}}
             </h4>
             <div v-if="media.authors">
-            <div v-for="author of media.authors" :key="author.name">
-            <q-avatar>
-                <img v-if="author.pic" :src="author.pic" />
-            </q-avatar>
-              <q-item-label>{{author.name}}</q-item-label>
-              </div>
+                <div v-for="author of media.authors" :key="author.name">
+                    <q-avatar>
+                        <img v-if="author.pic" :src="author.pic" />
+                    </q-avatar>
+                    <q-item-label>{{author.name}}</q-item-label>
+                </div>
             </div>
             <span>
                 <q-icon name="watch_later"></q-icon>
@@ -35,15 +35,9 @@
 
             <!-- share -->
             <div>
-                <button @click="facebook"><q-icon name="facebook"></q-icon>
-                    facebook
-                </button>
-                <span><q-icon name="twitter"></q-icon>
-                    <a class="twitter-share-button" href="https://twitter.com/intent/tweet"></a>
-                </span>
-                <span><q-icon class="pinterest"></q-icon>
-                    <a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" :data-pin-id="media.thumbnail"></a>
-                </span>
+                <Facebook :url="media.url" :description="media.description"></Facebook>
+                <Twitter :url="media.url" :description="media.description"></Twitter>
+                <Pinterest :url="media.url" :description="media.description"></Pinterest>
             </div>
         </div>
         <!--<div class="col-sm-4">
@@ -66,23 +60,28 @@
 
 <script lang="ts">
 //import auth from "../api/auth/SupabaseAuth";
+import { QuoteMedia } from "../media/QuoteMedia";
 import { Repository } from "../model/Repository";
 import MediaComponent from "../components/MediaComponent.vue"
 import { defineComponent } from "vue";
 import { IRepository } from "../model/IRepository";
-import { auth } from '../api/auth/SupabaseAuth'
+//import { auth } from '../api/auth/SupabaseAuth'
+import Facebook from 'vue-share-buttons/src/components/FacebookButton.vue';
+import Twitter from 'vue-share-buttons/src/components/TwitterButton.vue';
+import Pinterest from 'vue-share-buttons/src/components/PinterestButton.vue';
 
 let user: any
 let repository: IRepository
 let FB: any
 let media: any
+let quoteMedia = new QuoteMedia();
 
 export default defineComponent({
     name: 'SingleMediaPage',
-    setup() {
+    data() {
         return {
             media,
-            auth,
+            //auth,
             pos: "sidebar",
             repository,
             collIcon: 'library_add',
@@ -115,7 +114,10 @@ export default defineComponent({
         },*/
     //},
     components: {
-        MediaComponent
+        MediaComponent,
+        Facebook,
+        Twitter,
+        Pinterest
     },
     methods: {
         facebook() {
@@ -151,12 +153,13 @@ export default defineComponent({
         }*/
     },
     async mounted() {
-        let type = this.$route.query.mediaType as string
-        this.repository = new Repository(type)
-        const id =this.$route.params.id as string
-         this.media = await this.repository.readItem(id)
-         console.log('media: ', this.media)
-        //this.facebook()
+         let type = this.$route.query.mediaType as string
+            this.repository = new Repository(type)
+            const id =this.$route.params.id as string
+            const m = await this.repository.readItem(id)
+            this.media = m
+            console.log('media: ', this.media)
+            //this.facebook()
     }
 })
 </script>

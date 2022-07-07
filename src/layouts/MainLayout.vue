@@ -77,6 +77,7 @@
 import { defineComponent, ref } from 'vue';
 import { auth} from "../api/auth/SupabaseAuth";
 import site from '../../public/config.json';
+//import Serp from "../components/Search.vue"
 //import { Typesense } from 'src/typesense';
 
 let userInfo = auth.startSession()
