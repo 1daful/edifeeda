@@ -2,15 +2,16 @@ import { IMedia } from "./IMedia.js";
 import { IMediaApi } from "../api/IMediaApi.js";
 import { Media } from "./Media.js";
 import { Youtube } from "../api/video/Youtube.js";
+import { MediaRes } from "@/Types.js";
 export class VideoMedia implements IMedia {
     apis: IMediaApi[] = [];
     private mediaItems: Record<string, any>[] = [];
     media: Media;
     youtube: Youtube;
 
-    constructor() {
+    constructor(type: MediaRes) {
         this.youtube = new Youtube();
-        this.media = new Media("videos");
+        this.media = new Media(type);
         this.apis.push(this.youtube)
     }
 

@@ -13,7 +13,7 @@ export class QuoteMedia {
     constructor() {
         //this.paperQuotes = new PaperQuotes();
         //this.theySaidSo = new TheySaidSo();
-        this.zenQuotes = new ZenQuotes({});
+        this.zenQuotes = new ZenQuotes();
         this.media = new Media("quotes");
         this.apis.push(/*this.theySaidSo, */ this.zenQuotes);
     }
@@ -32,6 +32,12 @@ export class QuoteMedia {
         try {
             //NetworkLocal.test("Reading items from QuoteMedia")
             const res = await this.media.readItems('quotes', params, op);
+            /*if(res) {
+                res.forEach(async element => {
+                    const image = await this.media.getImage(this.media.url, element.description)
+                    if(image) element.thumbnailSmall = image.urls.regular
+                });
+            }*/
             console.log("QuoteMdia res: ", res);
             return res;
         }

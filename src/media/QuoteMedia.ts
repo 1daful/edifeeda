@@ -5,6 +5,7 @@ import { PaperQuotes } from "../api/quotes/PaperQuotes";
 import { TheySaidSo } from "../api/quotes/Theysaidso";
 //import { BookFormat } from "@/apiReqFormat/BookFormat";
 import { ZenQuotes } from "../api/quotes/ZenQuotes";
+import { MediaRes } from "@/Types";
 //import { NetworkLocal } from "../api/network";
 export class QuoteMedia implements IMedia {
     apis: IMediaApi[] = [];
@@ -15,11 +16,11 @@ export class QuoteMedia implements IMedia {
     zenQuotes: IMediaApi;
     //bookFormat: BookFormat = new BookFormat()
 
-    constructor() {
+    constructor(type: MediaRes) {
         //this.paperQuotes = new PaperQuotes();
         //this.theySaidSo = new TheySaidSo();
-        this.zenQuotes = new ZenQuotes({})
-        this.media = new Media("quotes");
+        this.zenQuotes = new ZenQuotes()
+        this.media = new Media(type);
         this.apis.push(/*this.theySaidSo, */this.zenQuotes)
     }
 
@@ -39,6 +40,13 @@ export class QuoteMedia implements IMedia {
         try {
             //NetworkLocal.test("Reading items from QuoteMedia")
             const res = await this.media.readItems('quotes', params, op)
+            /*if(res) {
+                res.forEach(async element => {
+                    const image = await this.media.getImage(this.media.url, element.description)
+                    if(image) element.thumbnailSmall = image.urls.regular
+                });
+            }*/
+                
             console.log("QuoteMdia res: ", res)
             return res
         }

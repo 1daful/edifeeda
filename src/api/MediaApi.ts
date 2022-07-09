@@ -73,7 +73,7 @@ export class MediaApi {
     }
 
     public async getItems(type: string, params?: Record<string, any>): Promise<Record<string, any>[]> {
-        this.api.apiFormat = new ApiFormat(params)
+        //this.api.apiFormat = new ApiFormat(params)
         const resource = this.getResource(type);
         //this.setBaseParam(resource);
         const client = new Axiosi(resource);
@@ -82,7 +82,7 @@ export class MediaApi {
     }
 
     public async postItem(type: string, params: Record<string, any>, data: Record<string,any>): Promise<Record<string, any>> {
-        this.api.apiFormat = new ApiFormat(params)
+        //this.api.apiFormat = new ApiFormat(params)
         const resource = this.getResource(type);
         //this.setBaseParam(resource);
         const client = new Axiosi(resource);

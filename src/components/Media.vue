@@ -45,15 +45,20 @@
 
 import { Recommender } from "../api/Recommender";
 import { defineComponent } from "vue";
+import { Axiosi } from "../api/Axiosi";
+import { MediaType } from "../Types";
 
 let recommender = new Recommender()
 let media: any
+let client = new Axiosi()
+let url = "https://api.unsplash.com/photos/random?client_id=h2QN0xKvn2yEbGzLAzt__xrgVQI_AVu2Gwn3WdZn0gE&query="
 
 export default defineComponent({
     name: 'Media',
     data() {
         return{
-            media
+            media,
+            client
         }
     },
     props: {
@@ -72,6 +77,14 @@ export default defineComponent({
       }*/
   },
   /*methods: {
+    async getImage(url: string, query: string) {
+        //mediaApi = new MediaApi(new Pexels(new ApiFormat(format)))
+          //const images = await mediaApi.getItems('images')
+         // const pexels = new Pexels({})
+          //const images = await pexels.getPhotos('e')
+         const image = await this.client.load(url + query)
+          return image?.data.urls.regular
+        //this.store.upload()
       addToCollection() {
           if (this.firAuth.currentUser) {
               this.repository.setItem(this.media.type, this.media);
@@ -96,13 +109,17 @@ export default defineComponent({
     async mounted() {
       await recommender.getMedia()
       try {
-      const p = await recommender.readMedia(this.mediaType)
+      const p = await recommender.readMedia(this.mediaType, {limit: 12})
       if (p) {
           const q = JSON.parse(JSON.stringify(p))
           const f = q.rows
           console.log("section.mediaList: ", q)
           console.log("this.section: ", f)
           this.media = f
+      /*this.media.forEach(async (element: any) => {
+        console.log("media description", element.description)
+        element.thumbnailSmall = await this.getImage(url, element.description)
+      });*/
       }
       }
       catch(error) {

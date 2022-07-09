@@ -2,6 +2,7 @@ import { IMedia } from "./IMedia.js";
 import { GoogleBooks } from "../api/book/GoogleBooks.js";
 import { IMediaApi } from "../api/IMediaApi.js";
 import { Media } from "./Media.js";
+import { MediaRes } from "@/Types.js";
 
 export class BookMedia implements IMedia{
     //publisher!: string;
@@ -11,9 +12,9 @@ export class BookMedia implements IMedia{
     apis: IMediaApi[] = [];
     media: Media;
     googleBooks: IMediaApi;
-    constructor(){
+    constructor(type: MediaRes){
         this.googleBooks = new GoogleBooks();
-        this.media = new Media("books");
+        this.media = new Media(type);
         this.apis.push(this.googleBooks);
     }
 

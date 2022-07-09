@@ -1,5 +1,5 @@
 import { ApiClient } from "../apiClient.js";
-import { ApiFormat } from "../apiReqFormat/ApiFormat";
+//import { ApiFormat } from "../apiReqFormat/ApiFormat";
 import { Resource } from "./Resource.js";
 
 /**
@@ -10,7 +10,7 @@ export interface IMediaApi {
     resources: Resource[];
 
     //apiFormat: ApiFormat;
-    getResource(format: ApiFormat): Resource
+    //getResource(format: ApiFormat): Resource
 
     //setDataSource(data: Record<string, any>): void;
 

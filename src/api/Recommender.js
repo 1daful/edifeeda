@@ -12,9 +12,9 @@ export class Recommender {
     //repository: IRepository = new Repository();
     /*constructor() {
     }*/
-    async readMedia(type, genre, author) {
+    async readMedia(type, op) {
         let params;
-        let op;
+        //let op;
         let mediaList;
         //let collMedia =[]
         /*switch (section) {
@@ -28,14 +28,14 @@ export class Recommender {
             op: '=',
             value: `${genre}`
         };*/
-        if (genre) {
+        /*if (genre) {
             params = ['genre'];
             op = {
                 [genre]: "$eq"
-            };
+            }
             mediaList = await this.load(type, params, op);
-            return mediaList;
-        }
+            return mediaList
+        }*/
         //break;
         //case 'sameAuthor':
         /*if (!item) {break;}
@@ -44,15 +44,15 @@ export class Recommender {
             op: '=',
             value: `${item.author}`
         }*/
-        if (author) {
+        /*if (author) {
             params = ['author'];
-            op = {
-                [author]: "$eq"
-            };
-            mediaList = await this.load(type, params, op);
-            return mediaList;
+        op = {
+            [author]: "$eq"
         }
-        mediaList = await this.load(type);
+        mediaList = await this.load(type, params, op);
+        return mediaList
+    }*/
+        mediaList = await this.load(type, [], op);
         /*break;
     case 'top':
         await this.load(mediaList);
@@ -71,7 +71,7 @@ export class Recommender {
         let items;
         switch (type) {
             case 'quotes':
-                items = await this.quoteMedia.readMedia(params);
+                items = await this.quoteMedia.readMedia(params, op);
                 console.log("mediaItems: ", items);
                 return items;
             //break;

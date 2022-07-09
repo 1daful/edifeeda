@@ -5,7 +5,7 @@ import { ApiFormat } from "../../apiReqFormat/ApiFormat";
 import config from "../../../public/config.json"
 
 export class ZenQuotes implements IMediaApi{
-    constructor(format: {}) {
+    constructor(format?: {}) {
       const apiFormat = new ApiFormat(format)
       this.quoteRes = this.getResource(apiFormat)
     }
@@ -38,7 +38,7 @@ export class ZenQuotes implements IMediaApi{
     qod = new Resource(this, 'qod',
     {
         name: 'qodReq',
-        baseUrl: '/qod',
+        baseUrl: '/random',
         params: {}
     },
     'qodResp'

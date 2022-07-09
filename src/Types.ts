@@ -46,3 +46,9 @@ export type ConfigType = {
   header: any
   baseParam: any
 }
+
+export type Params = {
+  limit: number
+}
+
+export type MediaRes = "quotes" | "videos" | "books" | "music" | "quote" | "video" | "book" | "track" | "collections" | "images"

@@ -1,5 +1,4 @@
 import { Axiosi } from "./Axiosi";
-import { ApiFormat } from "../apiReqFormat/ApiFormat";
 /**
  * This class takes all the individual media apis and use them for the application.
  */
@@ -66,7 +65,7 @@ export class MediaApi {
         return resource;
     }
     async getItems(type, params) {
-        this.api.apiFormat = new ApiFormat(params);
+        //this.api.apiFormat = new ApiFormat(params)
         const resource = this.getResource(type);
         //this.setBaseParam(resource);
         const client = new Axiosi(resource);
@@ -74,7 +73,7 @@ export class MediaApi {
         return items;
     }
     async postItem(type, params, data) {
-        this.api.apiFormat = new ApiFormat(params);
+        //this.api.apiFormat = new ApiFormat(params)
         const resource = this.getResource(type);
         //this.setBaseParam(resource);
         const client = new Axiosi(resource);

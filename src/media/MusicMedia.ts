@@ -3,6 +3,7 @@ import { IMediaApi } from "../api/IMediaApi.js";
 import { Media } from "./Media.js";
 import { SoundCloud } from "../api/music/SoundCloud.js";
 import { Axiosi } from "src/api/Axiosi.js";
+import { MediaRes } from "@/Types.js";
 
 export class MusicMedia implements IMedia {
     apis: IMediaApi[] = [];
@@ -10,9 +11,9 @@ export class MusicMedia implements IMedia {
     media: Media;
     soundCloud: IMediaApi;
 
-    constructor() {
+    constructor(type: MediaRes) {
         this.soundCloud = new SoundCloud();
-        this.media = new Media("music");
+        this.media = new Media(type);
         this.apis.push(this.soundCloud);
     }
 

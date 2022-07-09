@@ -6,18 +6,18 @@ import { VideoMedia } from "../media/VideoMedia";
 import { Media } from "../media/Media";
 
 export class Recommender {
-    bookMedia: IMedia = new BookMedia();
-    quoteMedia: IMedia = new QuoteMedia();
-    musicMedia: IMedia = new MusicMedia();
-    videoMedia: IMedia = new VideoMedia();
+    bookMedia: IMedia = new BookMedia("books");
+    quoteMedia: IMedia = new QuoteMedia("quotes");
+    musicMedia: IMedia = new MusicMedia("music");
+    videoMedia: IMedia = new VideoMedia("videos");
     media: Media = new Media("collections")
 
     //repository: IRepository = new Repository();
     /*constructor() {
     }*/
-    async readMedia(type: string, genre?: string, author?: string) {
+    async readMedia(type: string, op?: Record<string, any>) {
         let params;
-        let op;
+        //let op;
         let mediaList
         //let collMedia =[]
 
@@ -32,14 +32,14 @@ export class Recommender {
                     op: '=',
                     value: `${genre}`
                 };*/
-                if (genre) {
+                /*if (genre) {
                     params = ['genre'];
                     op = {
                         [genre]: "$eq"
                     }
                     mediaList = await this.load(type, params, op);
                     return mediaList
-                }
+                }*/
                 //break;
             //case 'sameAuthor':
                 /*if (!item) {break;}
@@ -48,15 +48,15 @@ export class Recommender {
                     op: '=',
                     value: `${item.author}`
                 }*/
-                if (author) {
+                /*if (author) {
                     params = ['author'];
                 op = {
                     [author]: "$eq"
                 }
                 mediaList = await this.load(type, params, op);
                 return mediaList
-            }
-            mediaList = await this.load(type);
+            }*/
+            mediaList = await this.load(type, [], op);
 
 
                 /*break;
@@ -79,7 +79,7 @@ export class Recommender {
         let items
             switch (type) {
                 case 'quotes':
-                    items = await this.quoteMedia.readMedia(params);
+                    items = await this.quoteMedia.readMedia(params, op);
                     console.log("mediaItems: ", items)
                     return items
                     //break;

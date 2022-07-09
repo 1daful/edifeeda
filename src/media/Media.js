@@ -22,7 +22,7 @@ export class Media {
     //search = new Typesense()
     //genre: string = '';
     client = new Axiosi();
-    url = "https://api.unspash.com/photos/random?client_id=h2QN0xKvn2yEbGzLAzt__xrgVQI_AVu2Gwn3WdZn0gE&query=";
+    url = "https://api.unsplash.com/photos/random?client_id=h2QN0xKvn2yEbGzLAzt__xrgVQI_AVu2Gwn3WdZn0gE&query=";
     /**
      * Used to delegate a media class method to get mediaItems from its registered media APIs, and the save them in the repository for peristence.
      * @param type
@@ -40,15 +40,23 @@ export class Media {
                 //NetworkLocal.test(`${name} good!`)
                 const items = await mediaApi.getItems(type, params);
                 //const images = await this.getImage(mediaApi, "christians")
-                if (items) {
+                if (items && type == "quotes") {
                     //NetworkLocal.test(`This is item from Media load. ${items}`)
                     //this.repository.changeDB('supabase')
-                    items.forEach(async (item) => {
-                        let i = 0;
-                        //item.thumbnailSmall = images[i].src.original
+                    for (let index = 0; index < 5; index++) {
+                        const item = items[index];
                         const image = await this.getImage(this.url, item.description);
                         item.thumbnailSmall = image.urls.regular;
-                    });
+                        item.thumbnailLarge = image.urls.regular;
+                    }
+                    /*items.forEach(async item => {
+                        console.log("item description", item.description)
+                      //let i = 0
+                      //item.thumbnailSmall = images[i].src.original
+                      const image = await this.getImage(this.url, item.description)
+                      item.thumbnailSmall = image.urls.regular
+                      item.thumbnailLarge = image.urls.regular
+                    });*/
                     console.log("this is item from Media load: ", items);
                     await this.addItems(items);
                     //this.search.import()
@@ -97,7 +105,8 @@ export class Media {
     }
     async getImage(url, query) {
         const format = new ApiFormat({
-            keyword: /*item.description*/ query
+            //item.description
+            keyword: query
         });
         //mediaApi = new MediaApi(new Pexels(new ApiFormat(format)))
         //const images = await mediaApi.getItems('images')

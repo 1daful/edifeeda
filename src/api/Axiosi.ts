@@ -2,7 +2,7 @@ import { ApiClient } from "../apiClient";
 import { Resource } from "./Resource";
 import axios, { AxiosRequestConfig } from 'axios';
 import { NetworkLocal } from "./network";
-import { networkInterfaces } from "os";
+//import { networkInterfaces } from "os";
 
 export class Axiosi implements ApiClient {
     constructor (resource?: Resource) {

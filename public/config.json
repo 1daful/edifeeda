@@ -1,7 +1,7 @@
 {
     "title": "Edifeeds",
     "baseUrl": "/",
-    "backURL": "http://localhost:8081/api/v1",
+    "backURL": "http://localhost:2000/api/v1",
     "logo": "../logo.png",
 
     "socials": [

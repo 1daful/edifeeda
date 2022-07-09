@@ -78,10 +78,11 @@ export class Pouchdb {
     async readItems(collName, params, op) {
         let items;
         //const params = new Utility().getDefault({include_doc: true}, filters)
-        if (params && op) {
+        if (op) {
             try {
+                op.include_docs = true;
                 //items = await this.find(params, op)
-                items = await this.db.allDocs({ include_docs: true });
+                items = await this.db.allDocs(op);
                 //console.log('with params: ', items)
             }
             catch (err) {

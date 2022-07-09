@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { NetworkLocal } from "./network";
+//import { networkInterfaces } from "os";
 export class Axiosi {
     constructor(resource) {
         if (resource) {
