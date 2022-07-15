@@ -3,6 +3,10 @@
     "baseUrl": "/",
     "backURL": "http://localhost:2000/api/v1",
     "logo": "../logo.png",
+    "email": {
+      "address": "contact@edifeeds.com",
+      "name": "Edifeeds"
+    },
 
     "socials": [
         {
@@ -88,6 +92,10 @@
     },
     "apiClient": "axios",
     "api": {
+      "Zeptomail": {
+        "token": "",
+        "url": ""
+      },
       "Pexels": {
 
         "baseUrl": "https://api.pexels.com/v1",
@@ -100,6 +108,10 @@
             "Authorization": "563492ad6f91700001000001da2c276cc81440fd966c2ec19ba234c2"
           }
         }
+      },
+      "Unsplash": {
+        "baseUrl": "https://api.unsplash.com",
+        "client_id": "h2QN0xKvn2yEbGzLAzt__xrgVQI_AVu2Gwn3WdZn0gE"
       },
         "auth0": {
             "name": "Edifeeds",

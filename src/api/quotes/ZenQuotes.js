@@ -6,7 +6,6 @@ export class ZenQuotes {
     constructor(format) {
         const apiFormat = new ApiFormat(format);
         this.quoteRes = this.getResource(apiFormat);
-        console.log("zenquote res ", this.resources);
     }
     getResource(format) {
         return new Resource(this, 'quotes', {
@@ -29,7 +28,7 @@ export class ZenQuotes {
     resources = [];
     apiFormat = new ApiFormat();
     quoteRes;
-    qod = new Resource(this, 'qod', {
+    qod = new Resource(this, 'quote', {
         name: 'qodReq',
         baseUrl: '/random',
         params: {}

@@ -4,10 +4,10 @@ import { MusicMedia } from "../media/MusicMedia";
 import { VideoMedia } from "../media/VideoMedia";
 import { Media } from "../media/Media";
 export class Recommender {
-    bookMedia = new BookMedia();
-    quoteMedia = new QuoteMedia();
-    musicMedia = new MusicMedia();
-    videoMedia = new VideoMedia();
+    bookMedia = new BookMedia("books");
+    quoteMedia = new QuoteMedia("quotes");
+    musicMedia = new MusicMedia("music");
+    videoMedia = new VideoMedia("videos");
     media = new Media("collections");
     //repository: IRepository = new Repository();
     /*constructor() {
@@ -94,7 +94,8 @@ export class Recommender {
     getMedia() {
         //new VideoMedia().getMedia()
         //new MusicMedia().getMedia()
-        new BookMedia().getMedia();
+        new BookMedia("books").getMedia();
+        new QuoteMedia("quotes").getMedia();
     }
 }
 //# sourceMappingURL=Recommender.js.map

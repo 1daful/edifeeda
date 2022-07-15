@@ -5,9 +5,9 @@ export class MusicMedia {
     //private mediaItems: Record<string, any>[] = [];
     media;
     soundCloud;
-    constructor() {
+    constructor(type) {
         this.soundCloud = new SoundCloud();
-        this.media = new Media("music");
+        this.media = new Media(type);
         this.apis.push(this.soundCloud);
     }
     async getMedia(params) {

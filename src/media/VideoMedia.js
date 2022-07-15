@@ -5,9 +5,9 @@ export class VideoMedia {
     mediaItems = [];
     media;
     youtube;
-    constructor() {
+    constructor(type) {
         this.youtube = new Youtube();
-        this.media = new Media("videos");
+        this.media = new Media(type);
         this.apis.push(this.youtube);
     }
     async getMedia(params) {

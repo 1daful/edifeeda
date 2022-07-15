@@ -105,6 +105,7 @@ export class Recommender {
     getMedia() {
         //new VideoMedia().getMedia()
         //new MusicMedia().getMedia()
-        new BookMedia().getMedia()
+        new BookMedia("books").getMedia()
+        new QuoteMedia("quotes").getMedia()
     }
 }

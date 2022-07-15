@@ -2,7 +2,7 @@ import { IMedia } from "./IMedia.js";
 import { IMediaApi } from "../api/IMediaApi.js";
 import { Media } from "./Media.js";
 import { SoundCloud } from "../api/music/SoundCloud.js";
-import { Axiosi } from "src/api/Axiosi.js";
+//import { Axiosi } from "src/api/Axiosi.js";
 import { MediaRes } from "@/Types.js";
 
 export class MusicMedia implements IMedia {

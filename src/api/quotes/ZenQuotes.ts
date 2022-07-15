@@ -35,7 +35,7 @@ export class ZenQuotes implements IMediaApi{
 
     quoteRes
 
-    qod = new Resource(this, 'qod',
+    qod = new Resource(this, 'quote',
     {
         name: 'qodReq',
         baseUrl: '/random',

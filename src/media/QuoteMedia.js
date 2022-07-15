@@ -10,11 +10,11 @@ export class QuoteMedia {
     //paperQuotes: IMediaApi;
     zenQuotes;
     //bookFormat: BookFormat = new BookFormat()
-    constructor() {
+    constructor(type) {
         //this.paperQuotes = new PaperQuotes();
         //this.theySaidSo = new TheySaidSo();
         this.zenQuotes = new ZenQuotes();
-        this.media = new Media("quotes");
+        this.media = new Media(type);
         this.apis.push(/*this.theySaidSo, */ this.zenQuotes);
     }
     async getMedia(params) {

@@ -46,7 +46,6 @@
 import { Recommender } from "../api/Recommender";
 import { defineComponent } from "vue";
 import { Axiosi } from "../api/Axiosi";
-import { MediaType } from "../Types";
 
 let recommender = new Recommender()
 let media: any
@@ -109,7 +108,7 @@ export default defineComponent({
     async mounted() {
       await recommender.getMedia()
       try {
-      const p = await recommender.readMedia(this.mediaType, {limit: 12})
+      const p = await recommender.readMedia(this.mediaType, {limit: 1})
       if (p) {
           const q = JSON.parse(JSON.stringify(p))
           const f = q.rows

@@ -18,7 +18,7 @@ import { defineComponent } from 'vue';
 import { MediaType } from "../Types";
 //import { Axiosi } from "../api/Axiosi";
 
-let quoteMedia = new QuoteMedia();
+let quoteMedia = new QuoteMedia("quote");
 let quote: MediaType
 //let thumbnail: string
 //let client = new Axiosi()
@@ -60,12 +60,12 @@ export default defineComponent ({
       },*/
       async mounted() {
           await quoteMedia.getMedia()
-          const f = await quoteMedia.readMedia([], {limit: 10})
+          const f = await quoteMedia.readMedia([], {limit: 2})
           console.log("f: ", f)
           const q = JSON.parse(JSON.stringify(f))
           console.log("q: ", q)
           const w = q.rows
-          const p = w[1]
+          const p = w[0]
           //const t = JSON.parse(JSON.stringify(p))
           this.quote = p?.doc;
           //this.thumbnail = await quoteMedia.getImage(this.quote.description)

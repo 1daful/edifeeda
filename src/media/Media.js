@@ -43,11 +43,11 @@ export class Media {
                 if (items && type == "quotes") {
                     //NetworkLocal.test(`This is item from Media load. ${items}`)
                     //this.repository.changeDB('supabase')
-                    for (let index = 0; index < 5; index++) {
+                    for (let index = 0; index < 1; index++) {
                         const item = items[index];
                         const image = await this.getImage(this.url, item.description);
-                        item.thumbnailSmall = image.urls.regular;
-                        item.thumbnailLarge = image.urls.regular;
+                        item.thumbnailSmall = image.links.self;
+                        item.thumbnailLarge = image.links.self;
                     }
                     /*items.forEach(async item => {
                         console.log("item description", item.description)

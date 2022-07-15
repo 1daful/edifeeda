@@ -9,6 +9,7 @@ import { Pexels } from "src/api/pic/Pexels.js";
 import { ApiFormat } from "src/apiReqFormat/ApiFormat.js";
 import { MediaRes, MediaType } from "src/Types.js";
 import { Axiosi } from "../api/Axiosi";
+import { Unsplash } from "../api/pic/ImageGen.js";
 
 //import { Typesense } from "src/typesense.js";
 //import { NetworkLocal } from "@/api/network.js";
@@ -24,10 +25,10 @@ export class Media {
     }
     repository
     store = new EdiStorage()
+    imageGen: Unsplash = new Unsplash()
     //search = new Typesense()
     //genre: string = '';
-    client = new Axiosi()
-    url = "https://api.unsplash.com/photos/random?client_id=h2QN0xKvn2yEbGzLAzt__xrgVQI_AVu2Gwn3WdZn0gE&query="
+    client = new Axiosi(this.imageGen.imageRes)
 
     /**
      * Used to delegate a media class method to get mediaItems from its registered media APIs, and the save them in the repository for peristence.
@@ -50,11 +51,11 @@ export class Media {
                 if (items && type=="quotes") {
                     //NetworkLocal.test(`This is item from Media load. ${items}`)
                     //this.repository.changeDB('supabase')
-                    for (let index = 0; index < 5; index++) {
+                    const images = await this.getImage()
+                    for (let index = 0; index < 1; index++) {
                         const item = items[index];
-                        const image = await this.getImage(this.url, item.description)
-                      item.thumbnailSmall = image.urls.regular
-                      item.thumbnailLarge = image.urls.regular
+                      item.thumbnailSmall = images[index].thumbnailSmall
+                      item.thumbnailLarge = images[index].thumbnailLarge
                     }
                     /*items.forEach(async item => {
                         console.log("item description", item.description)
@@ -116,17 +117,17 @@ export class Media {
 
     }
 
-    async getImage(url: string, query: string) {
+    async getImage() {
         const format = new ApiFormat({
             //item.description
-          keyword: query
+          //keyword: query
         })
         //mediaApi = new MediaApi(new Pexels(new ApiFormat(format)))
           //const images = await mediaApi.getItems('images')
          // const pexels = new Pexels({})
           //const images = await pexels.getPhotos('e')
-         const image = await this.client.load(url + query)
-          return image?.data
+         const images = await this.client.get()
+          return images
         //this.store.upload()
     }
     /*readItem(collName: string) {

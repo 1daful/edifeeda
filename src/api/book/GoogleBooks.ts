@@ -8,10 +8,6 @@ import config from "../../../public/config.json"
  * This is a concrete GoogleBooks class implementation of IMedia
  */
 export class GoogleBooks implements IMediaApi{
-    constructor() {}
-  getResource(format: ApiFormat): Resource {
-    throw new Error("Method not implemented.");
-  }
     client = new Axiosi()
     config!: any
     resources: Resource[] = [];

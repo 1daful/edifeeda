@@ -7,9 +7,9 @@ export class BookMedia {
     apis = [];
     media;
     googleBooks;
-    constructor() {
+    constructor(type) {
         this.googleBooks = new GoogleBooks();
-        this.media = new Media("books");
+        this.media = new Media(type);
         this.apis.push(this.googleBooks);
     }
     async readMedia(params, op) {
