@@ -39,7 +39,7 @@
                         params: {id: mediaItem.id},
                         query: {mediaType: mediaType}
                         }">
-                            <p class="text-weight-bold" style="font-size: 16px">{{mediaItem.doc.title}}</p>
+                            <p class="text-weight-bold truncate-small" style="font-size: 14px">{{mediaItem.doc.title}}</p>
                             <q-item-label class="caption text-subtitle1 truncate">{{mediaItem.doc.description}} </q-item-label>
                             <!--<span v-if="mediaItem.doc.description?.length > 180">...</span>-->
                                 
@@ -189,11 +189,11 @@ export default defineComponent({
 <style scoped>
 .my-card{
   width: 100%;
-  max-width: 300px
+  max-width: 400px
 }
 	.myCard {
     width: 100%;
-    max-width:250px;
+    max-width:300px;
     min-width: 200px;
     max-height: 400px;
     }
@@ -221,5 +221,10 @@ export default defineComponent({
         overflow: hidden;
         text-overflow: ellipsis;
         height: 100px
+    }
+    .truncate-small {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 40px
     }
 </style>
